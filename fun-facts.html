@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Random Fun Facts</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+
+        .container {
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+            padding: 40px;
+            max-width: 600px;
+            width: 100%;
+            text-align: center;
+        }
+
+        h1 {
+            color: #333;
+            margin-bottom: 10px;
+            font-size: 2.5em;
+        }
+
+        .subtitle {
+            color: #666;
+            margin-bottom: 30px;
+            font-size: 1.1em;
+        }
+
+        .fact-box {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 30px;
+            border-radius: 10px;
+            margin: 30px 0;
+            font-size: 1.3em;
+            line-height: 1.6;
+            min-height: 120px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            animation: fadeIn 0.5s ease-in;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .button-group {
+            display: flex;
+            gap: 10px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        button {
+            background-color: #667eea;
+            color: white;
+            border: none;
+            padding: 12px 30px;
+            border-radius: 25px;
+            cursor: pointer;
+            font-size: 1em;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4);
+        }
+
+        button:hover {
+            background-color: #764ba2;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(102, 126, 234, 0.6);
+        }
+
+        button:active {
+            transform: translateY(0);
+        }
+
+        .fact-counter {
+            color: #999;
+            font-size: 0.9em;
+            margin-top: 20px;
+        }
+
+        @media (max-width: 600px) {
+            .container {
+                padding: 25px;
+            }
+
+            h1 {
+                font-size: 1.8em;
+            }
+
+            .fact-box {
+                font-size: 1.1em;
+                padding: 20px;
+            }
+
+            button {
+                padding: 10px 20px;
+                font-size: 0.9em;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🎯 Fun Facts</h1>
+        <p class="subtitle">Click to discover amazing facts!</p>
+        
+        <div class="fact-box" id="factContainer">
+            Click the button to get started!
+        </div>
+
+        <div class="button-group">
+            <button onclick="displayRandomFact()">🎲 Random Fact</button>
+            <button onclick="nextFact()">⏭️ Next Fact</button>
+            <button onclick="previousFact()">⏮️ Previous Fact</button>
+        </div>
+
+        <div class="fact-counter">
+            <span id="factNumber">Fact 0</span> of <span id="totalFacts">0</span>
+        </div>
+    </div>
+
+    <script>
+        const facts = [
+            "🍌 Bananas are berries, but strawberries are not!",
+            "🍯 Honey never spoils; archaeological findings of honey in ancient Egypt have been tasted after thousands of years and found edible.",
+            "🦩 A group of flamingos is called a 'flamboyance.'",
+            "🐙 Octopuses have three hearts.",
+            "❄️ The world's largest desert is Antarctica.",
+            "🐱 Cats have over 20 different vocalizations to communicate.",
+            "⚡ A jiffy is an actual unit of time equal to one trillionth of a second.",
+            "💩 Wombat feces are cube-shaped to prevent rolling away.",
+            "🐨 The fingerprints of koalas are nearly identical to those of humans.",
+            "🐦 A group of crows is called a 'murder.'",
+            "🦑 Squid have a protein called reflectin that allows them to change color in milliseconds.",
+            "🌙 A day on Venus is longer than a year on Venus.",
+            "🧠 Honey bees can recognize human faces.",
+            "🦢 Swans can recognize themselves in mirrors.",
+            "🌊 Octopuses have blue blood due to a copper-based molecule called hemocyanin."
+        ];
+
+        let currentFactIndex = -1;
+
+        function displayRandomFact() {
+            currentFactIndex = Math.floor(Math.random() * facts.length);
+            updateDisplay();
+        }
+
+        function nextFact() {
+            currentFactIndex = (currentFactIndex + 1) % facts.length;
+            updateDisplay();
+        }
+
+        function previousFact() {
+            currentFactIndex = (currentFactIndex - 1 + facts.length) % facts.length;
+            updateDisplay();
+        }
+
+        function updateDisplay() {
+            document.getElementById('factContainer').textContent = facts[currentFactIndex];
+            document.getElementById('factNumber').textContent = `Fact ${currentFactIndex + 1}`;
+            document.getElementById('totalFacts').textContent = facts.length;
+        }
+
+        // Display a fact when the page loads
+        window.addEventListener('load', displayRandomFact);
+    </script>
+</body>
+</html>
